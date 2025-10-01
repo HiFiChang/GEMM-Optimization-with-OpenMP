@@ -1,6 +1,10 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import os
+import matplotlib
+# Use a non-interactive backend to avoid Qt/xcb issues in headless environments
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter
+import pandas as pd
 
 # --- Configuration ---
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -38,9 +42,11 @@ ax.set_xlabel('Matrix Size (N)', fontsize=12)
 ax.set_ylabel('Performance (Average GFLOPS/s)', fontsize=12)
 
 # Use a logarithmic scale for the x-axis for better visualization of N values
-ax.set_xscale('log')
-ax.set_xticks(data['N'].unique()) # Set ticks to actual N values
-ax.get_xaxis().set_major_formatter(plt.ScalarFormatter()) # Format ticks as numbers instead of scientific notation
+# ax.set_xscale('log')
+# Use sorted unique N values for ordered tick positions; spacing will be logarithmic by design
+# ax.set_xticks(sorted(data['N'].unique()))
+# Format tick labels as plain numbers instead of scientific notation on the log axis
+ax.get_xaxis().set_major_formatter(ScalarFormatter())
 plt.xticks(rotation=45)
 
 
