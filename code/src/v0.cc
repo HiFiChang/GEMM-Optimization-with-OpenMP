@@ -3,7 +3,6 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-// #define N 800
 #define ITERATIONS 10
 using namespace std;
 
@@ -17,7 +16,6 @@ double timestamp(){
 
 
 void yourFunction(float a, float b, float A[N][N], float B[N][N], float C[N][N]){
-
   for(int j=0; j<N; j++){
     for(int i=0; i<N; i++){
       C[i][j]+=b*C[i][j];
@@ -28,11 +26,9 @@ void yourFunction(float a, float b, float A[N][N], float B[N][N], float C[N][N])
       C[i][j] += tmp*a;
     }
   }
-
 }
 
 int main(){
-  // float A[N][N], B[N][N], C[N][N];
   float (*A)[N] = new float[N][N];
   float (*B)[N] = new float[N][N];
   float (*C)[N] = new float[N][N];
@@ -50,7 +46,6 @@ int main(){
       C[i][j]+=b*C[i][j];
       float tmp=0;
       for(int k=0; k<N; k++){
-        //C[i][j] += a*A[i][k]*B[k][j];
         tmp += A[i][k]*B[k][j];
       }
       C[i][j] += tmp*a;
@@ -74,7 +69,6 @@ int main(){
 
   double time = (time2-time1)/ITERATIONS;
   double flops = 2.0*N*N + 2.0*N*N*N + 2.0*N*N;
-  //double flops = 2*N*N + 2*N*N*N + N*N*N;
   double gflopsPerSecond = flops/(1000000000)/time;
   printf("N=%d\n", N);
   printf("GFLOPS/s=%lf\n",gflopsPerSecond );
